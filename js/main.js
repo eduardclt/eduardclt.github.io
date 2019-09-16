@@ -4,16 +4,22 @@ let roverCounter = 0;
 var BreakException = {};
 
 function generatePlateau(){
+    displayError("")
     let platX = document.getElementById("plateauX").value;
     let platY = document.getElementById("plateauY").value;
-    plateau = new Plateau(platX, platY);
-    //if platue exists show screen to add and move rovers
-    if (plateau){
-        document.getElementById("plateauForm").style.display="none";
-        document.getElementById("genRoverForm").style.display="block";
-        document.getElementById("moveRover").style.display="block";
+    if (Number.isInteger(+platX) && Number.isInteger(+platY)){
+        plateau = new Plateau(platX, platY);
+        //if platue exists show screen to add and move rovers
+        if (plateau){
+            document.getElementById("plateauForm").style.display="none";
+            document.getElementById("genRoverForm").style.display="block";
+            document.getElementById("moveRover").style.display="block";
+        }
+        displayPlat();
+    }else{
+        displayError("Invalid coordinates")
     }
-    displayPlat();
+    
 }
 
 function generateRover(){
@@ -23,7 +29,7 @@ function generateRover(){
     let roverX = document.getElementById("roverX").value;
     let roverY = document.getElementById("roverY").value;
     let roverOrient = document.getElementById("roverOrient").value;
-    if ((roverX >= plateau.minX && roverX <= plateau.maxX) && (roverY >= plateau.minY && roverY <= plateau.maxY)){
+    if (isValidRover(roverX, roverY, roverOrient.toUpperCase())){
         //create rover
         const rover = new Rover(roverX, roverY, roverOrient, roverCounter);
         allRovers.push(rover);
@@ -75,7 +81,15 @@ function executeMove(moveCommands, rover){
         if (e !== BreakException) throw e;
     }
     displayRovers();
-    
+}
+
+function isValidRover(roverX, roverY, roverOrient){
+    let compass = ["N", "E", "S", "W"];
+    if (((roverX >= plateau.minX && roverX <= plateau.maxX) && (roverY >= plateau.minY && roverY <= plateau.maxY)) && (compass.includes(roverOrient))){
+        return (true);
+    }else{
+        return(false);
+    }
 }
 
 
