@@ -1,75 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Mars Rover Challenge</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="./css/style.css" />
-    <script src="./js/main.js"></script>
-    <script src="./js/plateau.js"></script>
-	<script src="./js/rover.js"></script>
-	<script src="./js/display.js"></script>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Mars Rover Challenge</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./css/style.css" />
+        <script src="./js/main.js"></script>
+        <script src="./js/plateau.js"></script>
+        <script src="./js/rover.js"></script>
+        <script src="./js/display.js"></script>
 
-</head>
-<body>
-	<div class="container">
-		<div class="row">
-
-			<div class="column">
-				<form id="plateauForm" action="">
-					<h3 class="headings">Generate Plateau</h3>
-					<input id="plateauX" placeholder="plateau X">
-					<input id="plateauY" placeholder="plateau Y">
-					<div class="holder">
-						<button type="button" onclick="generatePlateau();">Generate plateau</button>
-					</div>	
-				</form>
-			</div>
-
-			<div class="column">
-				<form id="genRoverForm" style="display: none;" action="">
-					<h3 class="headings" >Generate Rover</h3>
-					<input id="roverX" placeholder="rover X">
-					<input id="roverY" placeholder="rover Y">
-					<input id="roverOrient" placeholder="rover orientation">
-					<button type="button" onclick="generateRover();">Generate rover</button>
-				</form>
-			</div>
-			
-			<div class="column">
-				<div id="plateauSize"></div>
-			</div>
-			
-			<div class="column">
-				<div id="rover"  style="width: 50%"></div>
-			</div>
-			
-			<div class="column">
-				<form id="moveRover" style="display: none;" action="">
-						<h3 class="headings" >Move Rover </h3>
-						<input id="roverID" placeholder="rover ID">
-						<input id="roverMove" placeholder="rover movement">
-						<button type="button" onclick="moveRover();">Move rover</button>
-				</form>
-			</div>
-
-			<div class="column">
-					<div id="errorMessage" ></div>
-			</div>
-			<div class="column">
-					<div id="sucMessage" ></div>
-			</div>
-		</div>
-
-		
-	</div>
-
-</body>
+    </head>
+    <body>
+        <div class="container">
+            <a href="withTesting.html"><button type="button">With Testing</button></a>
+            <a href="withoutTesting.html"><button  type="button">Without Testing</button></a>
+        </div>
+    </body>
 </html>
-
-<script>
-	
-
-
-</script>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Mars Rover Challenge</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="./css/style.css" />
+        <script src="./js/main.js"></script>
+        <script src="./js/plateau.js"></script>
+        <script src="./js/rover.js"></script>
+        <script src="./js/display.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+
+                <div class="column">
+                    <form id="plateauForm" action="">
+                        <h3 class="headings">Generate Plateau</h3>
+                        <input id="plateauX" placeholder="plateau X">
+                        <input id="plateauY" placeholder="plateau Y">
+                        <div class="holder">
+                            <button type="button" onclick="generatePlateauBtn();">Generate plateau</button>
+                        </div>	
+                    </form>
+                </div>
+
+                <div class="column">
+                    <form id="genRoverForm" style="display: none;" action="">
+                        <h3 class="headings" >Generate Rover</h3>
+                        <input id="roverX" placeholder="rover X">
+                        <input id="roverY" placeholder="rover Y">
+                        <input id="roverOrient" placeholder="rover orientation">
+                        <button type="button" onclick="generateRoverBtn();">Generate rover</button>
+                    </form>
+                </div>
+                
+                <div class="column">
+                    <div id="plateauSize"></div>
+                </div>
+                
+                <div class="column">
+                    <div id="rover"  style="width: 50%"></div>
+                </div>
+                
+                <div class="column">
+                    <form id="moveRover" style="display: none;" action="">
+                            <h3 class="headings" >Move Rover </h3>
+                            <input id="roverID" placeholder="rover ID">
+                            <input id="moveCommand" placeholder="rover movement">
+                            <button type="button" onclick="moveRoverBtn();">Move rover</button>
+                    </form>
+                </div>
+
+                <div class="column">
+                    <div id="errorMessage" ></div>
+                </div>
+                <div class="column">
+                    <div id="sucMessage" ></div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+
+<script>
+	function generatePlateauBtn(){
+		let platX = document.getElementById("plateauX").value;
+		let platY = document.getElementById("plateauY").value;
+		generatePlateau(platX, platY);
+	}
+
+	function generateRoverBtn(){
+		let roverX = document.getElementById("roverX").value;
+    	let roverY = document.getElementById("roverY").value;
+		let roverOrient = document.getElementById("roverOrient").value;
+		generateRover(roverX, roverY, roverOrient);
+		document.getElementById("roverX").value = '';
+    	document.getElementById("roverY").value = '';
+    	document.getElementById("roverOrient").value = '';
+	}
+
+	function moveRoverBtn(){
+		let roverID = document.getElementById("roverID").value;
+		let moveCommands = document.getElementById("moveCommand").value;
+		moveRover(roverID, moveCommands);
+		document.getElementById("roverID").value = '';
+    	document.getElementById("moveCommand").value = '';	
+	}
+
+</script>

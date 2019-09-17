@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Mars Rover Challenge</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="./css/style.css" />
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.4.0/jasmine.css"></link>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.4.0/jasmine.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.4.0/jasmine-html.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.4.0/boot.js"></script>
+
+		<script src="./js/main.js"></script>
+		<script src="./js/plateau.js"></script>
+		<script src="./js/rover.js"></script>
+		<script src="./js/display.js"></script>
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+
+				<div class="column">
+					<form id="plateauForm" action="">
+						<h3 class="headings">Generate Plateau</h3>
+						<input id="plateauX" placeholder="plateau X">
+						<input id="plateauY" placeholder="plateau Y">
+						<div class="holder">
+							<button type="button" onclick="generatePlateauBtn();">Generate plateau</button>
+						</div>	
+					</form>
+				</div>
+
+				<div class="column">
+					<form id="genRoverForm" style="display: none;" action="">
+						<h3 class="headings" >Generate Rover</h3>
+						<input id="roverX" placeholder="rover X">
+						<input id="roverY" placeholder="rover Y">
+						<input id="roverOrient" placeholder="rover orientation">
+						<button type="button" onclick="generateRoverBtn();">Generate rover</button>
+					</form>
+				</div>
+				
+				<div class="column">
+					<div id="plateauSize"></div>
+				</div>
+				
+				<div class="column">
+					<div id="rover"  style="width: 50%"></div>
+				</div>
+				
+				<div class="column">
+					<form id="moveRover" style="display: none;" action="">
+							<h3 class="headings" >Move Rover </h3>
+							<input id="roverID" placeholder="rover ID">
+							<input id="moveCommand" placeholder="rover movement">
+							<button type="button" onclick="moveRoverBtn();">Move rover</button>
+					</form>
+				</div>
+
+				<div class="column">
+					<div id="errorMessage" ></div>
+				</div>
+				<div class="column">
+					<div id="sucMessage" ></div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>
+
+<script>
+
+	describe('Plat: 5,5 Rover1: 1,2,N Move: LMLMLMLMM Rover2: 3,3,E Move: MMRMMRMRRM', () => {
+		it('Test 1',    () => {
+			let platX = 5;
+			let platY = 5;
+			const plateau = generatePlateau(platX,platY);
+			plateau;
+			expect(plateau).toBe(true);
+
+
+			let roverX = 1;
+			let roverY = 2;
+			let orient = "N";
+			let roverGen = generateRover(roverX, roverY, orient);
+			roverGen;
+			expect(roverGen).toBe(true);
+
+
+			let roverID = 1;
+			let moveCommands = "LMLMLMLMM";
+			let move = moveRover(roverID, moveCommands);	
+			let rover = allRovers[roverID - 1];
+			expect(rover.x).toBe(1);
+			expect(rover.y).toBe(3);
+			expect(rover.orientation).toBe("N");
+		
+			roverX = 3;
+			roverY = 3;
+			orient = "E";
+			roverGen = generateRover(roverX, roverY, orient);
+			roverGen;
+			expect(roverGen).toBe(true);
+
+
+			roverID = 2;
+			moveCommands = "MMRMMRMRRM";
+			move = moveRover(roverID, moveCommands);	
+			move;
+			rover = allRovers[roverID - 1];
+			expect(rover.x).toBe(5);
+			expect(rover.y).toBe(1);
+			expect(rover.orientation).toBe("E");
+		});
+	});
+
+</script>

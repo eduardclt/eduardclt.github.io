@@ -3,11 +3,9 @@ let plateau;
 let roverCounter = 0;
 var BreakException = {};
 
-function generatePlateau(){
+function generatePlateau(platX, platY){
     displayError("")
-    let platX = document.getElementById("plateauX").value;
-    let platY = document.getElementById("plateauY").value;
-    if (Number.isInteger(+platX) && Number.isInteger(+platY)){
+    if ((Number.isInteger(+platX) && Number.isInteger(+platY)) && (platX != '' && platY != '')){
         plateau = new Plateau(platX, platY);
         //if platue exists show screen to add and move rovers
         if (plateau){
@@ -16,48 +14,42 @@ function generatePlateau(){
             document.getElementById("moveRover").style.display="block";
         }
         displayPlat();
+        return (true);
     }else{
-        displayError("Invalid coordinates")
+        displayError("Invalid coordinates");
+        return (false);
     }
-    
 }
 
-function generateRover(){
+function generateRover(roverX, roverY, roverOrient){
     roverCounter++;
     displayError("");
-    displaySuc("");
-    let roverX = document.getElementById("roverX").value;
-    let roverY = document.getElementById("roverY").value;
-    let roverOrient = document.getElementById("roverOrient").value;
+    displaySuccess("");
     if (isValidRover(roverX, roverY, roverOrient.toUpperCase())){
         //create rover
         const rover = new Rover(roverX, roverY, roverOrient, roverCounter);
         allRovers.push(rover);
-        displaySuc("Rover Added Succsessfully!");
+        displaySuccess("Rover Added successfully!");
         displayRovers();
+        return (true);
     }else{
         displayError("Coordinates out of bounds");
+        return (false);
     }
-    document.getElementById("roverX").value = '';
-    document.getElementById("roverY").value = '';
-    document.getElementById("roverOrient").value = '';
-    
 }
 
-function moveRover(){
+function moveRover(roverID, moveCommands){
     displayError("");
-    displaySuc("");
-    let roverID = document.getElementById("roverID").value;
-    let moveCommands = document.getElementById("roverMove").value;
+    displaySuccess("");
     let rover = allRovers[roverID - 1];
     //check if valid rover is selected
     if (rover){
        executeMove(moveCommands, rover)
+       return (true);
     }else{
         displayError("The rover ID you selected does not exist");
+        return (false);
     }
-    document.getElementById("roverID").value = '';
-    document.getElementById("roverMove").value = '';	
 }
 
 function executeMove(moveCommands, rover){
@@ -68,16 +60,16 @@ function executeMove(moveCommands, rover){
         moveArray.forEach(function (command) {
             if (command.toUpperCase() == "M"){
                 if (!rover.move()){
-                    displayError("Oops, you went out of bounds! Some of the commands could not finish.");
                     throw BreakException;
                 }
             }else if(command.toUpperCase() == "L" || command.toUpperCase() == "R"){
                 rover.rotate(command);
             }
-            displaySuc("Rover Moved Succsessfully!");
+            displaySuccess("Rover Moved successfully!");
         });
     }catch(e){
-        displaySuc("");
+        displaySuccess("");
+        displayError("Oops, you went out of bounds! Some of the commands could not finish.");
         if (e !== BreakException) throw e;
     }
     displayRovers();
@@ -91,5 +83,3 @@ function isValidRover(roverX, roverY, roverOrient){
         return(false);
     }
 }
-
-

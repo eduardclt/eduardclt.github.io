@@ -21,11 +21,9 @@ function displayError(text){
     document.getElementById("errorMessage").innerHTML = text; 
 }
 
-function displaySuc(text){
+function displaySuccess(text){
     document.getElementById("sucMessage").innerHTML = text; 
 }
-
-
 
 function displayPlat(){
     text = "Plateau Size: " + plateau.maxX + " by " + plateau.maxY;
