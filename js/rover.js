@@ -6,6 +6,7 @@ class Rover {
         this.id = parseInt(id);
         //Rotate Rover
         this.rotate = function(direction) {
+            direction = direction.toUpperCase();
             switch (this.orientation) {
                 case "N":
                     direction == "R" ? (this.orientation = "E") : (this.orientation = "W");
